@@ -3,7 +3,7 @@ set -e
 
 echo "📦 Copying WAR file to Tomcat webapps..."
 
-WAR_SOURCE="target/nextwork-web-project.war"
+WAR_SOURCE=$(find /opt/codedeploy-agent/deployment-root -name "nextwork-web-project.war" | head -n 1)
 WAR_DEST="/opt/tomcat/webapps/nextwork-web-project.war"
 
 if [ -f "$WAR_SOURCE" ]; then
