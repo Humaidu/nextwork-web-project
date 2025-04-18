@@ -2,21 +2,22 @@
 #Amazon linux 2023 config
 set -e
 
-sudo rm -rf /opt/tomcat
-
 echo "🔧 Installing Java 17..."
 sudo dnf install -y java-17-amazon-corretto
 
 echo "👤 Creating tomcat user..."
-sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat || true
+id -u tomcat &>/dev/null || sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+
+echo "🧹 Cleaning previous Tomcat installation..."
+sudo rm -rf /opt/tomcat
+sudo mkdir -p /opt/tomcat
 
 echo "📦 Downloading Tomcat 9..."
 cd /tmp
-curl -L -O https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.85/bin/apache-tomcat-9.0.85.tar.gz
+curl -L -o tomcat.tar.gz https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.85/bin/apache-tomcat-9.0.85.tar.gz
 
 echo "📂 Installing Tomcat to /opt/tomcat..."
-sudo mkdir -p /opt/tomcat
-sudo tar xzvf apache-tomcat-9.0.85.tar.gz -C /opt/tomcat --strip-components=1
+sudo tar xzvf tomcat.tar.gz -C /opt/tomcat --strip-components=1
 
 echo "🔐 Setting permissions and executable flags..."
 sudo chown -R tomcat: /opt/tomcat
@@ -55,7 +56,6 @@ sudo systemctl enable tomcat
 sudo systemctl start tomcat
 
 echo "✅ Tomcat installed, started, and ready to deploy WAR files!"
-
 
 #Amazon linux 2 config
 # sudo yum install tomcat -y
