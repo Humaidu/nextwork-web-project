@@ -1,23 +1,8 @@
 #!/bin/bash
-
-#Amazon linux 2 config
-# sudo yum install tomcat -y
-# sudo yum -y install httpd
-# sudo cat << EOF > /etc/httpd/conf.d/tomcat_manager.conf
-# <VirtualHost *:80>
-#   ServerAdmin root@localhost
-#   ServerName app.nextwork.com
-#   DefaultType text/html
-#   ProxyRequests off
-#   ProxyPreserveHost On
-#   ProxyPass / http://localhost:8080/nextwork-web-project/
-#   ProxyPassReverse / http://localhost:8080/nextwork-web-project/
-# </VirtualHost>
-# EOF
-
-
 #Amazon linux 2023 config
 set -e
+
+sudo rm -rf /opt/tomcat
 
 echo "🔧 Installing Java 17..."
 sudo dnf install -y java-17-amazon-corretto
@@ -70,3 +55,21 @@ sudo systemctl enable tomcat
 sudo systemctl start tomcat
 
 echo "✅ Tomcat installed, started, and ready to deploy WAR files!"
+
+
+#Amazon linux 2 config
+# sudo yum install tomcat -y
+# sudo yum -y install httpd
+# sudo cat << EOF > /etc/httpd/conf.d/tomcat_manager.conf
+# <VirtualHost *:80>
+#   ServerAdmin root@localhost
+#   ServerName app.nextwork.com
+#   DefaultType text/html
+#   ProxyRequests off
+#   ProxyPreserveHost On
+#   ProxyPass / http://localhost:8080/nextwork-web-project/
+#   ProxyPassReverse / http://localhost:8080/nextwork-web-project/
+# </VirtualHost>
+# EOF
+
+
