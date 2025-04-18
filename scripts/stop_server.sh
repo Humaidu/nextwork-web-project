@@ -1,13 +1,9 @@
 #!/bin/bash
-
-# Stop Apache2 if it's running
-isExistApp="$(pgrep apache2)"
+isExistApp="$(pgrep httpd)"
 if [[ -n $isExistApp ]]; then
-  sudo systemctl stop apache2.service
+sudo systemctl stop httpd.service
 fi
-
-# Stop Tomcat (typically tomcat10) if it's running
-isExistApp="$(pgrep tomcat10)"
+isExistApp="$(pgrep tomcat)"
 if [[ -n $isExistApp ]]; then
-  sudo systemctl stop tomcat10.service
+sudo systemctl stop tomcat.service
 fi
