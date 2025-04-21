@@ -3,7 +3,12 @@
 set -e
 
 echo "🔧 Installing Java 17..."
-sudo dnf install -y java-17-amazon-corretto
+if command -v dnf &> /dev/null; then
+  sudo dnf install -y java-17-amazon-corretto
+else
+  sudo yum install -y java-17-amazon-corretto
+fi
+
 
 echo "👤 Creating tomcat user..."
 id -u tomcat &>/dev/null || sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
