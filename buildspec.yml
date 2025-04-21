@@ -8,7 +8,7 @@ phases:
   pre_build:
     commands:
       - echo Initializing environment
-      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain nextwork --domain-owner 309086350117 --region eu-north-1 --query authorizationToken --output text`
+      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain nextwork --domain-owner 309086350117 --region us-east-1 --query authorizationToken --output text`
 
   build:
     commands:
@@ -19,6 +19,6 @@ phases:
 artifacts:
   files:
     - target/nextwork-web-project.war
-    - appspec.yml
-    - scripts/**/*
+    # - appspec.yml
+    # - scripts/**/*
   discard-paths: no
